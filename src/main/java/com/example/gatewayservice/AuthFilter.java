@@ -23,15 +23,15 @@ public class AuthFilter implements GlobalFilter, Ordered {
         String apiKey = exchange.getRequest().getHeaders().getFirst(authHeader);
 
         if (authKey.equals(apiKey)) {
-            return chain.filter(exchange);  // Proceed if API key is valid
+            return chain.filter(exchange);
         }
 
-        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);  // Return 401 if API key is missing or invalid
+        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
         return exchange.getResponse().setComplete();
     }
 
     @Override
     public int getOrder() {
-        return -1;  // Ensure this filter has a high priority
+        return -1;
     }
 }
